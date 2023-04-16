@@ -1,0 +1,38 @@
+{
+    "schemaVersion": 1,
+    "id": "monarch_wings",
+    "version": "${version}",
+
+    "name": "Monarch Wings",
+    "description": "Gain the ability to double jump while wearing an elytra!",
+    "authors": [
+        "friedkeenan"
+    ],
+
+    "contact": {
+        "homepage": "https://github.com/friedkeenan/monarch-wings",
+        "sources": "https://github.com/friedkeenan/monarch-wings",
+        "issues": "https://github.com/friedkeenan/monarch-wings"
+    },
+
+    "license": "ISC",
+    "icon": "assets/monarch_wings/icon.png",
+
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "io.github.friedkeenan.monarch_wings.MonarchWingsMod"
+        ]
+    },
+
+    "mixins": [
+        "monarch_wings.mixins.json"
+    ],
+
+    "depends": {
+        "fabricloader": ">=0.14.17",
+        "fabric-api": "*",
+        "minecraft": "~1.19.4",
+        "java": ">=17"
+    }
+}

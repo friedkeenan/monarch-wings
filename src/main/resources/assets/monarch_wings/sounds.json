@@ -1,0 +1,9 @@
+{
+    "entity.monarch_wings.double_jump": {
+        "sounds": [
+            "monarch_wings:double_jump"
+        ],
+
+        "subtitle": "subtitles.entity.monarch_wings.double_jump"
+    }
+}
