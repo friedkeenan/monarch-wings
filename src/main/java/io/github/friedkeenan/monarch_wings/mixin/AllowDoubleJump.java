@@ -32,11 +32,15 @@ abstract public class AllowDoubleJump extends Entity implements DoubleJumper {
     private static float ELYTRA_FALL_REDUCTION   = 4.0f;
 
     /*
-        NOTE: I tried to get whether double jumping was enabled
-        to be properly saved, but injecting into
-        'readAdditionalSaveData' and 'addAdditionalSaveData'
-        did not work for some mysterious reason, and the feature
-        is not important enough to me to figure it out.
+        NOTE: I initially wanted to save whether the player had
+        their double jump enabled to their NBT data, but was
+        unsuccessful. Now, I know it was because the client was not
+        automatically informed of that data, and so I would need
+        to either set that information in a shared flag which seems
+        dubious and prone to mod incompatibility, or synchronize
+        it with a proper packet, which seems like a lot of overhead
+        for something that doesn't matter that much, and so we
+        neglect to save whether an entity has their double jump enabled.
     */
     private boolean double_jump_enabled = false;
 
