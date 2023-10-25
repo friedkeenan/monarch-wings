@@ -46,16 +46,15 @@ public class SetDoubleJumpedInfoPacket implements FabricPacket {
         this.on_ground = buf.readBoolean();
     }
 
-	@Override
-	public void write(FriendlyByteBuf buf) {
-		buf.writeVarInt(this.entity_id);
+    @Override
+    public void write(FriendlyByteBuf buf) {
+        buf.writeVarInt(this.entity_id);
         buf.writeBoolean(this.enabled);
         buf.writeBoolean(this.on_ground);
-	}
+    }
 
-	@Override
-	public PacketType<?> getType() {
-		return TYPE;
-	}
-
+    @Override
+    public PacketType<?> getType() {
+        return TYPE;
+    }
 }
