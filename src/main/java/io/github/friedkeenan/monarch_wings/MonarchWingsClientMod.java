@@ -10,7 +10,7 @@ public class MonarchWingsClientMod implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ClientPlayNetworking.registerGlobalReceiver(SetDoubleJumpedInfoPacket.TYPE, (packet, player, sender) -> {
-            @Nullable final var entity = packet.getEntity(player.level);
+            @Nullable final var entity = packet.getEntity(player.level());
             if (entity == null) {
                 return;
             }
@@ -19,7 +19,7 @@ public class MonarchWingsClientMod implements ClientModInitializer {
                 return;
             }
 
-            entity.setOnGround(packet.isOnGround());
+            entity.setOnGround(packet.onGround());
 
             final var double_jumper = (DoubleJumper) entity;
 

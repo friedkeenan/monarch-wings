@@ -20,7 +20,7 @@ public class SetDoubleJumpedInfoPacket implements FabricPacket {
     public SetDoubleJumpedInfoPacket(LivingEntity entity, boolean enabled) {
         this.entity_id = entity.getId();
         this.enabled   = enabled;
-        this.on_ground = entity.isOnGround();
+        this.on_ground = entity.onGround();
     }
 
     public SetDoubleJumpedInfoPacket(LivingEntity entity) {
@@ -36,7 +36,7 @@ public class SetDoubleJumpedInfoPacket implements FabricPacket {
         return this.enabled;
     }
 
-    public boolean isOnGround() {
+    public boolean onGround() {
         return this.on_ground;
     }
 
