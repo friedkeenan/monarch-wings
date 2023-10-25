@@ -1,6 +1,5 @@
 package io.github.friedkeenan.monarch_wings.mixin;
 
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -58,7 +57,7 @@ abstract public class AllowDoubleJump extends Entity implements DoubleJumper {
 
     @Override
     public void setDoubleJumpEnabled(boolean enabled) {
-        if (!this.level.isClientSide && enabled != this.double_jump_enabled) {
+        if (!this.level().isClientSide() && enabled != this.double_jump_enabled) {
             this.sendSetDoubleJumpEnabled(enabled);
         }
 
@@ -71,7 +70,7 @@ abstract public class AllowDoubleJump extends Entity implements DoubleJumper {
 
     @Inject(at = @At("TAIL"), method = "aiStep")
     private void enableDoubleJumpOnGround(CallbackInfo info) {
-        if (this.onGround) {
+        if (this.onGround()) {
             this.setDoubleJumpEnabled(true);
         } else if (this.isInFluid()) {
             this.setDoubleJumpEnabled(false);
@@ -87,14 +86,14 @@ abstract public class AllowDoubleJump extends Entity implements DoubleJumper {
             were wearing an elytra.
         */
 
-        if (!this.onGround) {
+        if (!this.onGround()) {
             this.playSound(MonarchWingsMod.DOUBLE_JUMP);
             this.gameEvent(GameEvent.FLAP);
 
             this.fallDistance = 0;
             this.setDoubleJumpEnabled(false);
 
-            if (this.level.isClientSide) {
+            if (this.level().isClientSide()) {
                 /*
                     The server normally calls 'jumpFromGround' when
                     the player sends a packet saying that they moved
@@ -126,7 +125,7 @@ abstract public class AllowDoubleJump extends Entity implements DoubleJumper {
     @Override
     public boolean canDoubleJump() {
         return (
-            !this.onGround               &&
+            !this.onGround()             &&
             this.double_jump_enabled     &&
             this.isWearingUsableElytra() &&
             !this.isPassenger()          &&
@@ -138,9 +137,8 @@ abstract public class AllowDoubleJump extends Entity implements DoubleJumper {
 
     @ModifyExpressionValue(
         at = @At(
-            value   = "FIELD",
-            target  = "Lnet/minecraft/world/entity/LivingEntity;onGround:Z",
-            opcode  = Opcodes.GETFIELD,
+            value   = "INVOKE",
+            target  = "Lnet/minecraft/world/entity/LivingEntity;onGround()Z",
             ordinal = 2
         ),
 
@@ -162,7 +160,7 @@ abstract public class AllowDoubleJump extends Entity implements DoubleJumper {
         method = "jumpFromGround"
     )
     private float increaseDoubleJumpPower(float original) {
-        if (this.onGround) {
+        if (this.onGround()) {
             return original;
         }
 

@@ -1,6 +1,5 @@
 package io.github.friedkeenan.monarch_wings.mixin;
 
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -20,9 +19,8 @@ public abstract class DisableGliding extends LivingEntity {
 
     @ModifyExpressionValue(
         at = @At(
-            value = "FIELD",
-            target = "Lnet/minecraft/world/entity/player/Player;onGround:Z",
-            opcode = Opcodes.GETFIELD
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/player/Player;onGround()Z"
         ),
 
         method = "tryToStartFallFlying"
@@ -30,7 +28,7 @@ public abstract class DisableGliding extends LivingEntity {
     private boolean disableGliding(boolean original) {
         final var double_jumper = (DoubleJumper) this;
 
-        if (this.level.dimension() == Level.END && double_jumper.isDoubleJumpDisabled()) {
+        if (this.level().dimension() == Level.END && double_jumper.isDoubleJumpDisabled()) {
             return original;
         }
 
