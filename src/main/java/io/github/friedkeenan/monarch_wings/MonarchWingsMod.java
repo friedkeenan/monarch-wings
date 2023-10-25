@@ -20,6 +20,15 @@ public class MonarchWingsMod implements ModInitializer {
         Registry.register(BuiltInRegistries.SOUND_EVENT, DOUBLE_JUMP_LOCATION, DOUBLE_JUMP);
 
         ServerPlayNetworking.registerGlobalReceiver(DoubleJumpPacket.TYPE, (packet, player, sender) -> {
+            /*
+                The player needed to not be on the ground to be able to double jump.
+
+                Normally the server is able to track this on its own
+                just fine, but in certain circumstances does not seem
+                to know, so we explicitly set it here.
+            */
+            player.setOnGround(false);
+
             player.jumpFromGround();
         });
 

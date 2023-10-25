@@ -6,7 +6,13 @@
 
     "mixins": [
         "DisableGliding",
-        "AllowDoubleJump"
+        "LocalDisableDoubleJumpWhenFlying",
+        "ServerDisableDoubleJumpWhenFlying",
+        "ClientboundAbilitiesDisableDoubleJumpWhenFlying",
+        "ServerboundAbilitiesDisableDoubleJumpWhenFlying",
+        "AllowDoubleJump",
+        "PairDoubleJumpEnabled",
+        "FlapElytraModel"
     ],
 
     "injectors": {
