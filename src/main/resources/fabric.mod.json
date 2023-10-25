@@ -22,6 +22,10 @@
     "entrypoints": {
         "main": [
             "io.github.friedkeenan.monarch_wings.MonarchWingsMod"
+        ],
+
+        "client": [
+            "io.github.friedkeenan.monarch_wings.MonarchWingsClientMod"
         ]
     },
 
